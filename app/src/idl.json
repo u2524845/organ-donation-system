@@ -1,0 +1,1631 @@
+{
+  "address": "7DtCGYSvSrpDJDEegvzjZKWibD6zi2rvzxPdYZiAVuvN",
+  "metadata": {
+    "name": "organ_donation_system",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "add_doctor",
+      "discriminator": [
+        79,
+        195,
+        205,
+        116,
+        208,
+        136,
+        89,
+        161
+      ],
+      "accounts": [
+        {
+          "name": "doctor_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  111,
+                  99,
+                  116,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "doctor_wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "hospital_account",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  104,
+                  111,
+                  115,
+                  112,
+                  105,
+                  116,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "hospital_wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "hospital_wallet",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "doctor_wallet"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "specialization",
+          "type": {
+            "defined": {
+              "name": "DoctorSpec"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "add_validator",
+      "discriminator": [
+        250,
+        113,
+        53,
+        54,
+        141,
+        117,
+        215,
+        185
+      ],
+      "accounts": [
+        {
+          "name": "validator_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  108,
+                  105,
+                  100,
+                  97,
+                  116,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "validator_wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "registry"
+          ]
+        },
+        {
+          "name": "validator_wallet"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "authorize_hospital",
+      "discriminator": [
+        83,
+        41,
+        135,
+        109,
+        156,
+        27,
+        174,
+        58
+      ],
+      "accounts": [
+        {
+          "name": "hospital_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  104,
+                  111,
+                  115,
+                  112,
+                  105,
+                  116,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "hospital_wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "registry"
+          ]
+        },
+        {
+          "name": "hospital_wallet"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "role",
+          "type": {
+            "defined": {
+              "name": "HospitalRole"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "doctor_sign",
+      "discriminator": [
+        82,
+        55,
+        158,
+        247,
+        161,
+        183,
+        154,
+        217
+      ],
+      "accounts": [
+        {
+          "name": "certification",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  101,
+                  114,
+                  116,
+                  105,
+                  102,
+                  105,
+                  99,
+                  97,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "certification.donor",
+                "account": "BrainDeathCertification"
+              }
+            ]
+          }
+        },
+        {
+          "name": "doctor_account",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  111,
+                  99,
+                  116,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "doctor_wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "doctor_wallet",
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "finalize_allocation",
+      "discriminator": [
+        56,
+        163,
+        79,
+        248,
+        42,
+        105,
+        247,
+        122
+      ],
+      "accounts": [
+        {
+          "name": "proposal",
+          "writable": true
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "registry"
+          ]
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "finalize_certification",
+      "discriminator": [
+        122,
+        20,
+        234,
+        189,
+        95,
+        88,
+        199,
+        198
+      ],
+      "accounts": [
+        {
+          "name": "certification",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  101,
+                  114,
+                  116,
+                  105,
+                  102,
+                  105,
+                  99,
+                  97,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "certification.donor",
+                "account": "BrainDeathCertification"
+              }
+            ]
+          }
+        },
+        {
+          "name": "hospital_account",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  104,
+                  111,
+                  115,
+                  112,
+                  105,
+                  116,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "hospital_wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "hospital_wallet",
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize_registry",
+      "discriminator": [
+        189,
+        181,
+        20,
+        17,
+        174,
+        57,
+        249,
+        59
+      ],
+      "accounts": [
+        {
+          "name": "registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "mark_deceased",
+      "discriminator": [
+        151,
+        122,
+        115,
+        89,
+        202,
+        179,
+        214,
+        203
+      ],
+      "accounts": [
+        {
+          "name": "donor_account",
+          "writable": true
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "registry"
+          ]
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "propose_allocation",
+      "discriminator": [
+        111,
+        172,
+        228,
+        160,
+        69,
+        200,
+        245,
+        202
+      ],
+      "accounts": [
+        {
+          "name": "proposal",
+          "writable": true
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "certification",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  101,
+                  114,
+                  116,
+                  105,
+                  102,
+                  105,
+                  99,
+                  97,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "donor_account"
+              }
+            ]
+          }
+        },
+        {
+          "name": "donor_account"
+        },
+        {
+          "name": "recipient_hospital"
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "registry"
+          ]
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "organ_bit",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "register_donor",
+      "discriminator": [
+        170,
+        42,
+        14,
+        170,
+        45,
+        210,
+        127,
+        107
+      ],
+      "accounts": [
+        {
+          "name": "donor_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  111,
+                  110,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "wallet",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "organs_bitmask",
+          "type": "u8"
+        },
+        {
+          "name": "nominee_wallet",
+          "type": {
+            "option": "pubkey"
+          }
+        },
+        {
+          "name": "ipfs_cid",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "revoke_consent",
+      "discriminator": [
+        36,
+        0,
+        100,
+        148,
+        132,
+        131,
+        112,
+        76
+      ],
+      "accounts": [
+        {
+          "name": "donor_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  111,
+                  110,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "wallet",
+          "signer": true,
+          "relations": [
+            "donor_account"
+          ]
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "revoke_doctor",
+      "discriminator": [
+        4,
+        85,
+        201,
+        220,
+        151,
+        175,
+        32,
+        40
+      ],
+      "accounts": [
+        {
+          "name": "doctor_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  111,
+                  99,
+                  116,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "doctor_account.wallet",
+                "account": "DoctorAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "hospital_account",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  104,
+                  111,
+                  115,
+                  112,
+                  105,
+                  116,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "hospital_wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "hospital_wallet",
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "revoke_hospital",
+      "discriminator": [
+        248,
+        20,
+        60,
+        244,
+        209,
+        242,
+        55,
+        60
+      ],
+      "accounts": [
+        {
+          "name": "hospital_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  104,
+                  111,
+                  115,
+                  112,
+                  105,
+                  116,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "hospital_account.wallet",
+                "account": "HospitalAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "registry"
+          ]
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "revoke_validator",
+      "discriminator": [
+        240,
+        45,
+        235,
+        3,
+        39,
+        165,
+        40,
+        101
+      ],
+      "accounts": [
+        {
+          "name": "validator_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  108,
+                  105,
+                  100,
+                  97,
+                  116,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "validator_account.wallet",
+                "account": "ValidatorAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "registry"
+          ]
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "submit_certification",
+      "discriminator": [
+        15,
+        233,
+        175,
+        70,
+        117,
+        114,
+        224,
+        163
+      ],
+      "accounts": [
+        {
+          "name": "certification",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  101,
+                  114,
+                  116,
+                  105,
+                  102,
+                  105,
+                  99,
+                  97,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "donor_account"
+              }
+            ]
+          }
+        },
+        {
+          "name": "hospital_account",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  104,
+                  111,
+                  115,
+                  112,
+                  105,
+                  116,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "hospital_wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "donor_account"
+        },
+        {
+          "name": "hospital_wallet",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "ipfs_cid",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "validator_approve",
+      "discriminator": [
+        16,
+        76,
+        254,
+        208,
+        136,
+        253,
+        241,
+        217
+      ],
+      "accounts": [
+        {
+          "name": "proposal",
+          "writable": true
+        },
+        {
+          "name": "validator_account",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  108,
+                  105,
+                  100,
+                  97,
+                  116,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "validator_wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "validator_wallet",
+          "signer": true
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "AllocationProposal",
+      "discriminator": [
+        121,
+        19,
+        15,
+        83,
+        91,
+        230,
+        136,
+        123
+      ]
+    },
+    {
+      "name": "BrainDeathCertification",
+      "discriminator": [
+        209,
+        241,
+        168,
+        184,
+        134,
+        68,
+        29,
+        99
+      ]
+    },
+    {
+      "name": "DoctorAccount",
+      "discriminator": [
+        253,
+        1,
+        68,
+        157,
+        144,
+        253,
+        166,
+        195
+      ]
+    },
+    {
+      "name": "DonorAccount",
+      "discriminator": [
+        117,
+        7,
+        167,
+        205,
+        254,
+        21,
+        69,
+        6
+      ]
+    },
+    {
+      "name": "DonorRegistry",
+      "discriminator": [
+        57,
+        176,
+        49,
+        211,
+        249,
+        154,
+        34,
+        7
+      ]
+    },
+    {
+      "name": "HospitalAccount",
+      "discriminator": [
+        14,
+        198,
+        35,
+        4,
+        188,
+        132,
+        255,
+        203
+      ]
+    },
+    {
+      "name": "ValidatorAccount",
+      "discriminator": [
+        32,
+        144,
+        229,
+        203,
+        9,
+        154,
+        158,
+        255
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidOrganBit",
+      "msg": "organ_bit must have exactly 1 bit set"
+    },
+    {
+      "code": 6001,
+      "name": "CertNotCertified",
+      "msg": "Brain death certification is not Certified yet"
+    },
+    {
+      "code": 6002,
+      "name": "RecipientNotActive",
+      "msg": "Recipient hospital is not active"
+    },
+    {
+      "code": 6003,
+      "name": "RecipientNotTransplant",
+      "msg": "Recipient hospital does not have TransplantCenter or Both role"
+    },
+    {
+      "code": 6004,
+      "name": "OrganNotDonated",
+      "msg": "This organ was not listed in the donor's consent"
+    },
+    {
+      "code": 6005,
+      "name": "ValidatorNotActive",
+      "msg": "Validator is not active"
+    },
+    {
+      "code": 6006,
+      "name": "ValidatorAlreadyInactive",
+      "msg": "Validator is already inactive"
+    },
+    {
+      "code": 6007,
+      "name": "ProposalNotOpen",
+      "msg": "Proposal is not in Proposed status"
+    },
+    {
+      "code": 6008,
+      "name": "AlreadyFullySigned",
+      "msg": "Proposal already has 5 validator signatures"
+    },
+    {
+      "code": 6009,
+      "name": "AlreadyVoted",
+      "msg": "Validator has already voted on this proposal"
+    },
+    {
+      "code": 6010,
+      "name": "QuorumNotReached",
+      "msg": "Quorum not reached — need at least 3 validator approvals"
+    },
+    {
+      "code": 6011,
+      "name": "Unauthorized",
+      "msg": "Unauthorized — signer does not own this account"
+    }
+  ],
+  "types": [
+    {
+      "name": "AllocStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Proposed"
+          },
+          {
+            "name": "Approved"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AllocationProposal",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "donor",
+            "type": "pubkey"
+          },
+          {
+            "name": "certification",
+            "type": "pubkey"
+          },
+          {
+            "name": "recipient_hospital",
+            "type": "pubkey"
+          },
+          {
+            "name": "organ_bit",
+            "type": "u8"
+          },
+          {
+            "name": "proposed_by",
+            "type": "pubkey"
+          },
+          {
+            "name": "validators",
+            "type": {
+              "array": [
+                "pubkey",
+                5
+              ]
+            }
+          },
+          {
+            "name": "validator_count",
+            "type": "u8"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "AllocStatus"
+              }
+            }
+          },
+          {
+            "name": "proposed_at",
+            "type": "i64"
+          },
+          {
+            "name": "finalized_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BrainDeathCertification",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "donor",
+            "type": "pubkey"
+          },
+          {
+            "name": "hospital",
+            "type": "pubkey"
+          },
+          {
+            "name": "ipfs_cid",
+            "type": "string"
+          },
+          {
+            "name": "signers",
+            "type": {
+              "array": [
+                "pubkey",
+                4
+              ]
+            }
+          },
+          {
+            "name": "signer_count",
+            "type": "u8"
+          },
+          {
+            "name": "has_neuro",
+            "type": "bool"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "CertStatus"
+              }
+            }
+          },
+          {
+            "name": "submitted_at",
+            "type": "i64"
+          },
+          {
+            "name": "certified_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CertStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Pending"
+          },
+          {
+            "name": "Certified"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DoctorAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "hospital",
+            "type": "pubkey"
+          },
+          {
+            "name": "specialization",
+            "type": {
+              "defined": {
+                "name": "DoctorSpec"
+              }
+            }
+          },
+          {
+            "name": "is_active",
+            "type": "bool"
+          },
+          {
+            "name": "added_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DoctorSpec",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Neurologist"
+          },
+          {
+            "name": "Neurosurgeon"
+          },
+          {
+            "name": "ICUSpecialist"
+          },
+          {
+            "name": "Transplant"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DonorAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "organs_bitmask",
+            "type": "u8"
+          },
+          {
+            "name": "nominee_wallet",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "ipfs_cid",
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "DonorStatus"
+              }
+            }
+          },
+          {
+            "name": "registered_at",
+            "type": "i64"
+          },
+          {
+            "name": "updated_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DonorRegistry",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "donor_count",
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DonorStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Active"
+          },
+          {
+            "name": "Revoked"
+          },
+          {
+            "name": "Deceased"
+          }
+        ]
+      }
+    },
+    {
+      "name": "HospitalAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "role",
+            "type": {
+              "defined": {
+                "name": "HospitalRole"
+              }
+            }
+          },
+          {
+            "name": "is_active",
+            "type": "bool"
+          },
+          {
+            "name": "authorized_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "HospitalRole",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "ICU"
+          },
+          {
+            "name": "TransplantCenter"
+          },
+          {
+            "name": "Both"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ValidatorAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "is_active",
+            "type": "bool"
+          },
+          {
+            "name": "added_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ]
+}

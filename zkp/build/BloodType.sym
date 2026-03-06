@@ -1,0 +1,14 @@
+1,1,1,main.compatible
+2,2,1,main.donorType
+3,3,1,main.recipientType
+4,-1,1,main.incompatible[0]
+5,-1,1,main.incompatible[1]
+6,-1,1,main.incompatible[2]
+7,4,0,main.donorBits.out[0]
+8,5,0,main.donorBits.out[1]
+9,6,0,main.donorBits.out[2]
+10,-1,0,main.donorBits.in
+11,7,0,main.recipientBits.out[0]
+12,8,0,main.recipientBits.out[1]
+13,9,0,main.recipientBits.out[2]
+14,-1,0,main.recipientBits.in

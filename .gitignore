@@ -1,0 +1,17 @@
+.anchor
+.DS_Store
+target
+**/*.rs.bk
+node_modules
+test-ledger
+.yarn
+
+# Environment variables — never commit secrets
+app/.env
+app/.env.local
+zkp/node_modules
+
+# Solana keypairs — never commit private keys
+scripts/doctor-keys.json
+scripts/validator-keys.json
+*-wallet.json
