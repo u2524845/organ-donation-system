@@ -15,3 +15,4 @@ zkp/node_modules
 scripts/doctor-keys.json
 scripts/validator-keys.json
 *-wallet.json
+app/.env.save
