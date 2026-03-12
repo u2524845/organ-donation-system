@@ -745,6 +745,7 @@ body::after {
   background: radial-gradient(ellipse at top, color-mix(in srgb, var(--role-color) 10%, transparent), transparent 70%);
   opacity: 0;
   transition: opacity 0.3s;
+  pointer-events: none;
 }
 
 .role-card:hover::before { opacity: 1; }
