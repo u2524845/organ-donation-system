@@ -602,7 +602,7 @@ body::after {
   color: #475569;
 }
 
-/* ── Wallet adapter override ────────────────────────────── */
+/* ── Wallet adapter — Connect button ────────────────────── */
 
 .wallet-adapter-button {
   font-family: 'Inter', sans-serif !important;
@@ -616,16 +616,203 @@ body::after {
   transition: all 0.2s !important;
 }
 
-.wallet-adapter-button:hover {
+.wallet-adapter-button:not([disabled]):hover {
   box-shadow: 0 6px 24px rgba(124, 106, 255, 0.5) !important;
   transform: translateY(-1px) !important;
+  background: linear-gradient(135deg, #8b7aff, #7c6aff) !important;
 }
+
+/* ── Wallet adapter — Modal overlay ─────────────────────── */
+
+.wallet-adapter-modal-overlay {
+  background: rgba(4, 5, 14, 0.85) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+/* ── Wallet adapter — Modal container ───────────────────── */
 
 .wallet-adapter-modal-wrapper {
   font-family: 'Inter', sans-serif !important;
-  background: #0d0e1f !important;
+  background: #0b0c1e !important;
+  border: 1px solid rgba(124, 106, 255, 0.25) !important;
+  border-radius: 24px !important;
+  box-shadow:
+    0 0 0 1px rgba(124, 106, 255, 0.08),
+    0 32px 64px rgba(0, 0, 0, 0.6),
+    0 0 80px rgba(124, 106, 255, 0.08) !important;
+  padding: 2rem !important;
+  max-width: 420px !important;
+  width: calc(100vw - 2rem) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.wallet-adapter-modal-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124, 106, 255, 0.5), transparent);
+  pointer-events: none;
+}
+
+.wallet-adapter-modal-wrapper::after {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(124, 106, 255, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Wallet adapter — Title ──────────────────────────────── */
+
+.wallet-adapter-modal-title {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  color: #e2e8f0 !important;
+  text-align: center !important;
+  margin-bottom: 0.5rem !important;
+  letter-spacing: -0.02em !important;
+}
+
+.wallet-adapter-modal-wrapper p {
+  font-size: 0.8rem !important;
+  color: #475569 !important;
+  text-align: center !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* ── Wallet adapter — Wallet list ───────────────────────── */
+
+.wallet-adapter-modal-list {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.5rem !important;
+}
+
+.wallet-adapter-modal-list li {
+  width: 100% !important;
+}
+
+.wallet-adapter-modal-list .wallet-adapter-button {
+  width: 100% !important;
+  background: rgba(17, 20, 40, 0.8) !important;
   border: 1px solid rgba(45, 49, 72, 0.9) !important;
-  border-radius: 20px !important;
+  border-radius: 14px !important;
+  padding: 0.85rem 1.1rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.85rem !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  color: #cbd5e1 !important;
+  box-shadow: none !important;
+  transition: all 0.2s !important;
+  justify-content: flex-start !important;
+  text-align: left !important;
+  height: auto !important;
+}
+
+.wallet-adapter-modal-list .wallet-adapter-button:not([disabled]):hover {
+  background: rgba(124, 106, 255, 0.1) !important;
+  border-color: rgba(124, 106, 255, 0.4) !important;
+  color: #e2e8f0 !important;
+  transform: translateX(3px) !important;
+  box-shadow: 0 4px 20px rgba(124, 106, 255, 0.12) !important;
+}
+
+.wallet-adapter-modal-list .wallet-adapter-button-start-icon,
+.wallet-adapter-modal-list .wallet-adapter-button-start-icon img {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 10px !important;
+  flex-shrink: 0 !important;
+}
+
+/* detected badge */
+.wallet-adapter-modal-list li .wallet-adapter-button p {
+  font-size: 0.7rem !important;
+  color: #4ade80 !important;
+  margin: 0 !important;
+  margin-left: auto !important;
+  text-align: right !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em !important;
+  opacity: 0.8 !important;
+}
+
+/* ── Wallet adapter — "More wallets" collapse ───────────── */
+
+.wallet-adapter-modal-list-more {
+  background: none !important;
+  border: none !important;
+  color: #7c6aff !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  padding: 0.75rem 0 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+  width: 100% !important;
+  justify-content: center !important;
+  transition: color 0.2s !important;
+  margin-top: 0.25rem !important;
+}
+
+.wallet-adapter-modal-list-more:hover {
+  color: #a78bfa !important;
+}
+
+.wallet-adapter-modal-list-more svg {
+  fill: currentColor !important;
+  width: 14px !important;
+  height: 14px !important;
+}
+
+/* ── Wallet adapter — Close button ──────────────────────── */
+
+.wallet-adapter-modal-button-close {
+  background: rgba(45, 49, 72, 0.5) !important;
+  border: 1px solid rgba(71, 75, 106, 0.4) !important;
+  border-radius: 8px !important;
+  width: 32px !important;
+  height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.2s !important;
+  position: absolute !important;
+  top: 1.25rem !important;
+  right: 1.25rem !important;
+}
+
+.wallet-adapter-modal-button-close:hover {
+  background: rgba(239, 68, 68, 0.15) !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+.wallet-adapter-modal-button-close svg {
+  fill: #64748b !important;
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.wallet-adapter-modal-button-close:hover svg {
+  fill: #f87171 !important;
 }
 
 /* ── Copy input ─────────────────────────────────────────── */

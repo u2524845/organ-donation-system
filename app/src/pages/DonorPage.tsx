@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { SystemProgram } from "@solana/web3.js";
 import { useProgram, getPda } from "../hooks/useProgram";
@@ -35,18 +35,37 @@ export default function DonorPage() {
   const [donorInfo, setDonorInfo] = useState<any>(null);
   const [registryReady, setRegistryReady] = useState<boolean | null>(null);
 
+  const registryPda = publicKey ? getPda([Buffer.from("registry")]) : null;
+  const donorPda    = publicKey ? getPda([Buffer.from("donor"), publicKey.toBuffer()]) : null;
+
+  useEffect(() => {
+    if (!program || !registryPda || !donorPda) return;
+    (async () => {
+      try {
+        await program.account.donorRegistry.fetch(registryPda);
+        setRegistryReady(true);
+      } catch {
+        setRegistryReady(false);
+        return;
+      }
+      try {
+        const info = await program.account.donorAccount.fetch(donorPda);
+        setDonorInfo(info);
+      } catch {
+        setDonorInfo(null);
+      }
+    })();
+  }, [program]);
+
   if (!publicKey) {
     return (
       <div className="connect-prompt">
         <span className="connect-prompt-icon">🫀</span>
-        <h2>Connect your Phantom wallet to register as a donor</h2>
+        <h2>Connect your wallet to register as a donor</h2>
         <p>Use the Connect Wallet button in the top right</p>
       </div>
     );
   }
-
-  const registryPda = getPda([Buffer.from("registry")]);
-  const donorPda    = getPda([Buffer.from("donor"), publicKey.toBuffer()]);
 
   const toggleOrgan = (bit: number) => {
     setSelectedOrgans(prev =>
@@ -57,9 +76,9 @@ export default function DonorPage() {
   const organsBitmask = selectedOrgans.reduce((acc, bit) => acc | bit, 0);
 
   const checkRegistry = async () => {
-    if (!program) return;
+    if (!program || !registryPda) return;
     try {
-      await program.account.registry.fetch(registryPda);
+      await program.account.donorRegistry.fetch(registryPda);
       setRegistryReady(true);
     } catch {
       setRegistryReady(false);
@@ -69,7 +88,7 @@ export default function DonorPage() {
   const initializeRegistry = async () => {
     if (!program) return;
     try {
-      setStatus("Initializing registry — please sign in Phantom...");
+      setStatus("Initializing registry — please sign the transaction in your wallet...");
       await program.methods
         .initializeRegistry()
         .accounts({
@@ -86,7 +105,7 @@ export default function DonorPage() {
   };
 
   const fetchDonorInfo = async () => {
-    if (!program) return;
+    if (!program || !donorPda) return;
     try {
       const info = await program.account.donorAccount.fetch(donorPda);
       setDonorInfo(info);
@@ -136,7 +155,7 @@ export default function DonorPage() {
 
       // ── Step 3: Register on-chain with the CID ────────────
       setStep("signing");
-      setStatus("Please sign the transaction in Phantom...");
+      setStatus("Please sign the transaction in your wallet...");
 
       await program.methods
         .registerDonor(organsBitmask, null, ipfsCid)
@@ -259,16 +278,15 @@ export default function DonorPage() {
         </div>
       )}
 
-      {/* Registry init — only needed once on first deploy */}
+      {/* Registry not initialized */}
       {registryReady === false && (
         <div className="card">
-          <h2>One-Time Setup Required</h2>
-          <div className="alert alert-info" style={{ marginBottom: "1rem" }}>
-            The registry contract needs to be initialized once before donors can register.
+          <div className="alert alert-error">
+            The on-chain registry is not initialized.
           </div>
-          {status && <div className="alert alert-info">{status}</div>}
-          {error  && <div className="alert alert-error">{error}</div>}
-          <button className="btn btn-primary" onClick={initializeRegistry}>
+          {status && <div className="alert alert-info" style={{ marginTop: "0.5rem" }}>{status}</div>}
+          {error  && <div className="alert alert-error" style={{ marginTop: "0.5rem" }}>{error}</div>}
+          <button className="btn btn-primary" onClick={initializeRegistry} style={{ marginTop: "1rem" }}>
             Initialize Registry
           </button>
         </div>
@@ -342,7 +360,7 @@ export default function DonorPage() {
               disabled={step !== "form"}
             >
               {step === "uploading" ? "Encrypting & Uploading..." :
-               step === "signing"   ? "Sign in Phantom..." :
+               step === "signing"   ? "Sign in wallet..." :
                "Register Consent"}
             </button>
             {organsBitmask > 0 && (

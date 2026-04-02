@@ -74,7 +74,7 @@ function Landing({ onSelect }: { onSelect: (r: Role) => void }) {
       </div>
 
       <p className="landing-footer">
-        Connect your Phantom wallet after selecting your role
+        Connect your wallet after selecting your role
       </p>
     </div>
   );
