@@ -1322,6 +1322,7 @@ body::after {
 
 .hero-3d canvas {
   border-radius: 24px;
+  background: transparent !important;
 }
 
 .heart-placeholder {
@@ -2008,4 +2009,22 @@ details[open] .faq-question::after {
   color: #334155;
   margin: 1.5rem auto 0;
   padding: 0 2rem;
+}
+
+/* ── Spline 3D — transparent + hide watermark ───────────── */
+
+.hero-3d > div,
+.hero-3d > div > div {
+  background: transparent !important;
+}
+
+/* Hide Spline "Built with Spline" watermark */
+.hero-3d a[href*="spline"],
+.hero-3d div[class*="logo"],
+.hero-3d div[class*="watermark"],
+.hero-3d > div > a,
+.hero-3d > div > div:last-child {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }

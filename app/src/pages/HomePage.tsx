@@ -115,7 +115,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
         <div className="hero-3d">
           <Suspense fallback={<div className="heart-placeholder">🫀</div>}>
-            <Spline scene="https://prod.spline.design/KN2VRFL0rbxWggNm/scene.splinecode" />
+            <Spline
+              scene="https://prod.spline.design/KN2VRFL0rbxWggNm/scene.splinecode"
+              style={{ background: "transparent", width: "100%", height: "100%" }}
+            />
           </Suspense>
         </div>
 
