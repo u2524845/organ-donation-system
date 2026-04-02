@@ -2013,7 +2013,7 @@ details[open] .faq-question::after {
 
 
 /* ═══════════════════════════════════════════════════════════
-   ANATOMICAL HEART ILLUSTRATION
+   3D HEART (React Three Fiber)
    ═══════════════════════════════════════════════════════════ */
 
 .heart3d-root {
@@ -2024,84 +2024,40 @@ details[open] .faq-question::after {
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: none;
 }
 
-/* Ambient glow */
+.heart3d-root canvas {
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+/* Ambient glow — sits behind the canvas */
 .heart3d-glow {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
+  z-index: 0;
 }
 
 .heart3d-glow-1 {
-  width: 380px;
-  height: 380px;
-  background: radial-gradient(circle, rgba(124, 106, 255, 0.18) 0%, transparent 70%);
-  animation: glowPulse 3s ease-in-out infinite;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(124, 106, 255, 0.2) 0%, transparent 70%);
+  animation: glowPulse 3.5s ease-in-out infinite;
 }
 
 .heart3d-glow-2 {
-  width: 280px;
-  height: 280px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
-  animation: glowPulse 3s ease-in-out infinite 1s;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.13) 0%, transparent 70%);
+  animation: glowPulse 3.5s ease-in-out infinite 1.2s;
 }
 
 @keyframes glowPulse {
   0%, 100% { transform: scale(1);    opacity: 1;   }
-  50%       { transform: scale(1.15); opacity: 0.6; }
-}
-
-/* Main heart container — floats gently */
-.heart3d-wrap {
-  position: relative;
-  width: 280px;
-  height: 320px;
-  animation: organFloat 4s ease-in-out infinite;
-  filter:
-    drop-shadow(0 12px 40px rgba(76, 29, 149, 0.7))
-    drop-shadow(0 0 60px rgba(124, 106, 255, 0.35));
-}
-
-@keyframes organFloat {
-  0%, 100% { transform: translateY(0px) rotate(-2deg); }
-  50%       { transform: translateY(-16px) rotate(2deg); }
-}
-
-.heart3d-svg {
-  width: 100%;
-  height: 100%;
-}
-
-/* Drop shadow blob below organ */
-.heart3d-shadow-blob {
-  position: absolute;
-  bottom: -24px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 180px;
-  height: 24px;
-  background: radial-gradient(ellipse, rgba(76, 29, 149, 0.6) 0%, transparent 70%);
-  border-radius: 50%;
-  filter: blur(8px);
-  animation: shadowPulse 4s ease-in-out infinite;
-}
-
-@keyframes shadowPulse {
-  0%, 100% { transform: translateX(-50%) scaleX(1);    opacity: 0.6; }
-  50%       { transform: translateX(-50%) scaleX(0.75); opacity: 0.3; }
-}
-
-/* Pulse ring on the SVG path */
-.heart3d-pulse-ring {
-  animation: heartbeatRing 2s ease-out infinite;
-  transform-origin: 155px 175px;
-}
-
-@keyframes heartbeatRing {
-  0%   { transform: scale(1);    opacity: 0.7; }
-  70%  { transform: scale(1.12); opacity: 0;   }
-  100% { transform: scale(1.12); opacity: 0;   }
+  50%       { transform: scale(1.18); opacity: 0.6; }
 }
 
 /* Floating particles */
@@ -2109,19 +2065,20 @@ details[open] .faq-question::after {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
+  z-index: 2;
 }
 
-.heart3d-particle-1 { width:5px; height:5px; background:#c4b5fd; top:18%; left:10%; animation: particleDrift 5s ease-in-out infinite 0.0s; }
-.heart3d-particle-2 { width:3px; height:3px; background:#7c6aff; top:65%; left:8%;  animation: particleDrift 6s ease-in-out infinite 0.8s; }
-.heart3d-particle-3 { width:4px; height:4px; background:#a78bfa; top:12%; right:12%; animation: particleDrift 4.5s ease-in-out infinite 1.2s; }
-.heart3d-particle-4 { width:3px; height:3px; background:#ddd6fe; top:78%; right:10%; animation: particleDrift 7s ease-in-out infinite 0.4s; }
-.heart3d-particle-5 { width:4px; height:4px; background:#8b5cf6; top:42%; left:4%;  animation: particleDrift 5.5s ease-in-out infinite 2.0s; }
-.heart3d-particle-6 { width:3px; height:3px; background:#ede9fe; top:28%; right:6%; animation: particleDrift 6.5s ease-in-out infinite 1.6s; }
-.heart3d-particle-7 { width:2px; height:2px; background:#7c6aff; top:82%; left:22%; animation: particleDrift 4s ease-in-out infinite 0.6s; }
-.heart3d-particle-8 { width:5px; height:5px; background:#a78bfa; top:8%;  left:38%; animation: particleDrift 5s ease-in-out infinite 1.0s; }
+.heart3d-particle-1 { width:5px; height:5px; background:#c4b5fd; top:18%; left:8%;  animation: particleDrift 5s ease-in-out infinite 0.0s; }
+.heart3d-particle-2 { width:3px; height:3px; background:#7c6aff; top:65%; left:6%;  animation: particleDrift 6s ease-in-out infinite 0.8s; }
+.heart3d-particle-3 { width:4px; height:4px; background:#a78bfa; top:12%; right:10%; animation: particleDrift 4.5s ease-in-out infinite 1.2s; }
+.heart3d-particle-4 { width:3px; height:3px; background:#ddd6fe; top:78%; right:8%;  animation: particleDrift 7s ease-in-out infinite 0.4s; }
+.heart3d-particle-5 { width:4px; height:4px; background:#8b5cf6; top:42%; left:3%;  animation: particleDrift 5.5s ease-in-out infinite 2.0s; }
+.heart3d-particle-6 { width:3px; height:3px; background:#ede9fe; top:30%; right:5%; animation: particleDrift 6.5s ease-in-out infinite 1.6s; }
+.heart3d-particle-7 { width:2px; height:2px; background:#7c6aff; top:84%; left:20%; animation: particleDrift 4s ease-in-out infinite 0.6s; }
+.heart3d-particle-8 { width:5px; height:5px; background:#a78bfa; top:6%;  left:42%; animation: particleDrift 5s ease-in-out infinite 1.0s; }
 
 @keyframes particleDrift {
-  0%, 100% { transform: translateY(0)     scale(1);    opacity: 0.6; }
+  0%, 100% { transform: translateY(0)     scale(1);   opacity: 0.6; }
   40%       { transform: translateY(-14px) scale(1.3); opacity: 1;   }
   70%       { transform: translateY(5px)   scale(0.8); opacity: 0.3; }
 }
@@ -2129,7 +2086,6 @@ details[open] .faq-question::after {
 /* Mobile */
 @media (max-width: 900px) {
   .hero-3d-mobile .heart3d-root { min-height: 300px; }
-  .hero-3d-mobile .heart3d-wrap { width: 200px; height: 228px; }
-  .hero-3d-mobile .heart3d-glow-1 { width: 260px; height: 260px; }
+  .hero-3d-mobile .heart3d-glow-1 { width: 280px; height: 280px; }
   .hero-3d-mobile .heart3d-glow-2 { width: 200px; height: 200px; }
 }
