@@ -1,6 +1,5 @@
-import { Suspense, lazy, useEffect, useRef } from "react";
-
-const Spline = lazy(() => import("@splinetool/react-spline"));
+import { useEffect, useRef } from "react";
+import Heart3D from "../components/Heart3D";
 
 type Page = "home" | "about" | "contact" | "portal";
 
@@ -114,16 +113,11 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
 
         <div className="hero-3d">
-          <Suspense fallback={<div className="heart-placeholder">🫀</div>}>
-            <Spline
-              scene="https://prod.spline.design/KN2VRFL0rbxWggNm/scene.splinecode"
-              style={{ background: "transparent", width: "100%", height: "100%" }}
-            />
-          </Suspense>
+          <Heart3D />
         </div>
 
         <div className="hero-3d-mobile">
-          <div className="heart-mobile-glow">🫀</div>
+          <Heart3D />
         </div>
       </section>
 
