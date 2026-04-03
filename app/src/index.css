@@ -2099,10 +2099,18 @@ details[open] .faq-question::after {
 }
 
 .organ-card-emoji {
-  font-size: 2.2rem;
-  line-height: 1;
+  width: 52px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   filter: drop-shadow(0 0 10px var(--organ-glow));
   transition: transform 0.3s;
+}
+
+.organ-card-emoji svg {
+  width: 100%;
+  height: 100%;
 }
 
 .organ-card-visual:hover .organ-card-emoji {
