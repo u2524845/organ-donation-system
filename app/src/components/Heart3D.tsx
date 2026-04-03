@@ -12,7 +12,7 @@ export default function Heart3D() {
     <div className="organ-visual">
       <div className="organ-visual-title">
         <span className="organ-visual-dot" />
-        Organs We Protect
+        Organs Registered On-Chain
       </div>
       <div className="organ-grid-visual">
         {ORGANS.map((o, i) => (

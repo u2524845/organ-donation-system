@@ -8,12 +8,6 @@ const TEAM = [
   { name: "Akash Kumar Vanzara", role: "Blockchain Developer", initial: "A" },
 ];
 
-const TECH = [
-  { name: "Solana", desc: "High-throughput L1 blockchain — 65,000 TPS, sub-second finality, $0.00025 per transaction." },
-  { name: "Anchor", desc: "Rust framework for building Solana programs with type-safe account validation." },
-  { name: "IPFS", desc: "Decentralized file storage for encrypted donor data. Only the content hash lives on-chain." },
-  { name: "React + Vite", desc: "Fast, modern frontend with TypeScript for type safety and Vite for instant hot-reload." },
-];
 
 const WHY = [
   { icon: "🔗", title: "Immutability", desc: "Once data is written to the blockchain it cannot be altered or deleted by anyone — not even us." },
@@ -68,20 +62,6 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
               <div className="team-avatar">{member.initial}</div>
               <div className="team-name">{member.name}</div>
               <div className="team-role">{member.role}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Tech Stack */}
-      <section className="about-tech section-inner">
-        <div className="section-tag">Tech Stack</div>
-        <h2 className="section-title">Built With</h2>
-        <div className="tech-grid">
-          {TECH.map(t => (
-            <div key={t.name} className="tech-card">
-              <div className="tech-name">{t.name}</div>
-              <p className="tech-desc">{t.desc}</p>
             </div>
           ))}
         </div>
